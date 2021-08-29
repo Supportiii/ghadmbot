@@ -50,12 +50,9 @@ class QueryResults:
 class Keyboards:
     def info_keyboard(self):
         return types.InlineKeyboardMarkup(inline_keyboard=
-             [[types.InlineKeyboardButton('🇺🇸 English',    url='https://teletype.in/@undrcrxwn/hidethisbot_en'),
-               types.InlineKeyboardButton('🇵🇱 Polski',     url='https://teletype.in/@undrcrxwn/hidethisbot_pl')],
-              [types.InlineKeyboardButton('🇷🇺 Русский',    url='https://teletype.in/@undrcrxwn/hidethisbot_ru'),
-               types.InlineKeyboardButton('🇺🇦 Українська', url='https://teletype.in/@undrcrxwn/hidethisbot_ua')],
-              [types.InlineKeyboardButton('🇮🇹 Italiano',   url='https://teletype.in/@undrcrxwn/hidethisbot_it'),
-               types.InlineKeyboardButton('🇨🇿 Čeština',    url='https://teletype.in/@undrcrxwn/hidethisbot_cz')]])
+             [[types.InlineKeyboardButton('👥 Group',             url='https://t.me/iSupGr')],
+              [types.InlineKeyboardButton('👷 TestGroups',        url='https://t.me/iTestGroups'),
+               types.InlineKeyboardButton('🌐 Official Bot Repo', url='https://teletype.in/@undrcrxwn/hidethisbot_cz')]])
 
 class Media:
     def group_greeting_sticker_id(self):
