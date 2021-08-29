@@ -50,9 +50,9 @@ class QueryResults:
 class Keyboards:
     def info_keyboard(self):
         return types.InlineKeyboardMarkup(inline_keyboard=
-             [[types.InlineKeyboardButton('👥 Group',             url='https://t.me/iSupGr')],
-              [types.InlineKeyboardButton('👷 TestGroups',        url='https://t.me/iTestGroups'),
-              [types.InlineKeyboardButton('🌐 Official Bot Repo', url='https://github.com/undrcrxwn/hidethisbot'')]]),
+              [[types.InlineKeyboardButton('👥 Group',             url='https://t.me/iSupGr')],
+               [types.InlineKeyboardButton('👷 TestGroups',        url='https://t.me/iTestGroups'),
+                types.InlineKeyboardButton('🌐 Official Bot Repo',  url='https://github.com/undrcrxwn/hidethisbot')]]),
 class Media:
     def group_greeting_sticker_id(self):
         return random.choice(('CAACAgIAAxkBAAECkihg7Y5tYnlKz9jRe6QCNOyvEZri2wACSQ4AAliyaUuDPYCgY_2GXiAE',
