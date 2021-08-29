@@ -50,7 +50,8 @@ class QueryResults:
 class Keyboards:
     def info_keyboard(self):
         return types.InlineKeyboardMarkup(inline_keyboard=
-              [[types.InlineKeyboardButton('👥 Group',             url='https://t.me/iSupGr')],
+              [[types.InlineKeyboardButton('📑 HowTo',             url='https://telegra.ph/TGi-08-29')],
+               [types.InlineKeyboardButton('👥 Group',             url='https://t.me/iSupGr')],
                [types.InlineKeyboardButton('👷 TestGroups',        url='https://t.me/iTestGroups'),
                 types.InlineKeyboardButton('🌐 Official Bot Repo', url='https://github.com/undrcrxwn/hidethisbot')]])
 class Media:
