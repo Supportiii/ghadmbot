@@ -52,9 +52,7 @@ locale_it.spoiler_message = 'Messaggio contenente spoiler.'
 
 # GROUP_GREETING_MESSAGE
 locale_en.group_greeting_message = (
-        '👋 Hi! My name is %s and I can help you send private messages that only certain people can view. '
-        'To learn more send /start@%s and feel free to ask for help in our '
-        '<a href="t.me/iSupGr">Supportiiis">public community</a> if you\'ve got any questions.')
+        '👋 <b>Hello! I am @TGInlineBot with this bot you can send messages in a group privately to a user or except one user and if you want you can also send spoilers! Read my guide using the buttons below.</b>')
 locale_de.group_greeting_message = (
         '👋 Hallo! Mein Name ist @TGinlineBot und ich kann dir dabei helfen, private Nachrichten zu versenden, die nur bestimmte Personen sehen können. '
         'Drücke auf /start, um mehr zu erfahren und tritt unserer Support Gruppe bei.'
