@@ -2,8 +2,8 @@
 [TG Inline Message Bot](https://t.me/TLGRMstart) is an inline Telegram bot to keep your private messages hidden from prying eyes.
 
 [![](https://www.codefactor.io/repository/github/undrcrxwn/hidethisbot/badge/master)](https://www.codefactor.io/repository/github/undrcrxwn/hidethisbot/overview/master) 
-[![](https://img.shields.io/badge/telegram-@hidethisbot-blue)](https://t.me/TLGRMstart) 
-[![](https://img.shields.io/badge/community-@hidethisbot__chat-blue)](https://t.me/iSupGr)
+[![](https://img.shields.io/badge/telegram-@TLGRMstart-blue)](https://t.me/TLGRMstart) 
+[![](https://img.shields.io/badge/community-@iSupGr__chat-blue)](https://t.me/iSupGr)
 
 ### How do I host it?
 Here is a brief guide you can follow to host your own Hide This Bot in case you are afraid of data leaks or for any other reason.
