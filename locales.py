@@ -54,9 +54,7 @@ locale_it.spoiler_message = 'Messaggio contenente spoiler.'
 locale_en.group_greeting_message = (
         '👋 <b>Hello! I am @TGInlineBot with this bot you can send messages in a group privately to a user or except one user and if you want you can also send spoilers! Read my guide using the buttons below.</b>')
 locale_de.group_greeting_message = (
-        '👋 Hallo! Mein Name ist @TGinlineBot und ich kann dir dabei helfen, private Nachrichten zu versenden, die nur bestimmte Personen sehen können. '
-        'Drücke auf /start, um mehr zu erfahren und tritt unserer Support Gruppe bei.'
-        '<a href="t.me/iSupGr">Supportiiis Gruppe</a> wenn du Fragen hast.')
+        '👋 <b>Hallo! Ich bin @TGInlineBot. Mit diesem Bot kannst du Nachrichten in einer Gruppe privat an einen Nutzer oder an alle bis auf einen Nutzer senden und wenn du willst kannst du auch Spoiler senden! Lies einfach meine Anleitung über die Buttons unten.</b>')
 locale_it.group_greeting_message = (
         '👋 <b>Ciao! Io sono @TGInlineBot con questo bot puoi inviare messaggi in gruppo in privato ad un utente o tranne un utente e se vuoi puoi anche inviare spoiler! Leggi la mia guida usando i pulsanti qui sotto.</b>')
 
