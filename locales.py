@@ -37,48 +37,48 @@ locale_it.too_long_message = '🥺 Mi dispiace, il tuo messaggio non può essere
 
 # FOR_MESSAGE
 locale_en.for_message = '🌚 Private message for %s.'
-locale_de.for_message = '🌚 Private Nachricht für %s.'
+locale_de.for_message = '🌚 Private Nachricht an %s.'
 locale_it.for_message = '🌚 Messaggio privato per %s.'
 
 # EXCEPT_MESSAGE
-locale_en.except_message = 'Private message for everyone except %s.'
-locale_de.except_message = 'Private Nachricht an alle ausser %s.'
-locale_it.except_message = 'Messaggio privato per tutti tranne %s.'
+locale_en.except_message = '🤡 Private message for everyone except %s.'
+locale_de.except_message = '🤡 Private Nachricht an alle ausser %s.'
+locale_it.except_message = '🤡 Messaggio privato per tutti tranne %s.'
 
 # SPOILER_MESSAGE
 locale_en.spoiler_message = 'Public spoiler message.'
-locale_de.spoiler_message = 'Öffentlicher Spoiler.'
+locale_de.spoiler_message = 'Öffentlicher Spoiler:'
 locale_it.spoiler_message = 'Messaggio contenente spoiler.'
 
 # GROUP_GREETING_MESSAGE
 locale_en.group_greeting_message = (
-        '👋 <b>Hello! I am @TGInlineBot with this bot you can send messages in a group privately to a user or except one user and if you want you can also send spoilers! Read my guide using the buttons below.</b>')
+        '👋 Hello! I am @TGInlineBot with this bot you can send messages in a group privately to a user or except one user and if you want you can also send spoilers! Read my guide using the buttons below.')
 locale_de.group_greeting_message = (
-        '👋 <b>Hallo! Ich bin @TGInlineBot. Mit diesem Bot kannst du Nachrichten in einer Gruppe privat an einen Nutzer oder an alle bis auf einen Nutzer senden und wenn du willst kannst du auch Spoiler senden! Lies einfach meine Anleitung über die Buttons unten.</b>')
+        '👋 Hallo! Ich bin @TGInlineBot. Mit diesem Bot kannst du Nachrichten in einer Gruppe privat an einen Nutzer oder an alle bis auf einen Nutzer senden und wenn du willst kannst du auch Spoiler senden! Lies einfach meine Anleitung über die Buttons unten.')
 locale_it.group_greeting_message = (
-        '👋 <b>Ciao! Io sono @TGInlineBot con questo bot puoi inviare messaggi in gruppo in privato ad un utente o tranne un utente e se vuoi puoi anche inviare spoiler! Leggi la mia guida usando i pulsanti qui sotto.</b>')
+        '👋 Ciao! Io sono @TGInlineBot con questo bot puoi inviare messaggi in gruppo in privato ad un utente o tranne un utente e se vuoi puoi anche inviare spoiler! Leggi la mia guida usando i pulsanti qui sotto.')
 
 # INFO_MESSAGE
 locale_en.info_message = (
-        '👋 **Hello! I am @TGInlineBot with this bot you can send messages in a group privately to a user or except one user '
-        'and if you want you can also send spoilers! Read my guide using the buttons below**.\n\n'
+        '👋 Hello! I am @TGInlineBot with this bot you can send messages in a group privately to a user or except one user '
+        'and if you want you can also send spoilers! Read my guide using the buttons below.\n\n'
         '👥 Chat: @iSupGr\n'
-        '🆘 Support: @iSupGr')
+        '🆘 Support: @iSuppoitBot')
 locale_de.info_message = (
-        '👋 **Hallo! Ich bin @TGInlineBot. Mit diesem Bot kannst du Nachrichten in einer Gruppe privat an einen Nutzer oder an alle bis auf einen Nutzer senden '
-        'und wenn du willst kannst du auch Spoiler senden! Lies einfach meine Anleitung über die Buttons unten**.\n\n'
+        '👋 Hallo! Ich bin @TGInlineBot. Mit diesem Bot kannst du Nachrichten in einer Gruppe privat an einen Nutzer oder an alle bis auf einen Nutzer senden '
+        'und wenn du willst kannst du auch Spoiler senden! Lies einfach meine Anleitung über die Buttons unten.\n\n'
         '👥 Chat: @iSupGr\n'
-        '🆘 Support: @iSupGr')
+        '🆘 Support: @iSuppoitBot')
 locale_it.info_message = (
-        '👋 **Ciao! Io sono @TGInlineBot con questo bot puoi inviare messaggi in gruppo in privato ad un utente o tranne un utente '
-        'e se vuoi puoi anche inviare spoiler! Leggi la mia guida usando i pulsanti qui sotto**.\n\n'
+        '👋 Ciao! Io sono @TGInlineBot con questo bot puoi inviare messaggi in gruppo in privato ad un utente o tranne un utente '
+        'e se vuoi puoi anche inviare spoiler! Leggi la mia guida usando i pulsanti qui sotto.\n\n'
         '👥 Chat: @iSupGr\n'
-        '🆘 Support: @iSupGr')
+        '🆘 Support: @iSuppoitBot')
 
 # HOW_TO_USE
-locale_en.how_to_use = 'How to use this bot?'
-locale_de.how_to_use = 'Wie geht das?'
-locale_it.how_to_use = 'Come usare questo bot?'
+locale_en.how_to_use = '🤔 How to use this bot?'
+locale_de.how_to_use = '🤔 Wie geht das?'
+locale_it.how_to_use = '🤔 Come usare questo bot?'
 
 # TOO_LONG_DESCRIPTION
 locale_en.too_long_description = 'Please shorten the length of your message so that it doesn\'t exceed the limit of 200 characters.'
@@ -92,15 +92,15 @@ locale_it.not_allowed = 'Non hai il permesso per vedere questo messaggio.'
 
 # NOT_ACCESSIBLE
 locale_en.not_accessible = 'This content is no longer accessible.'
-locale_de.not_accessible = 'Der Inhalt ist nicht länger sichtbar.'
+locale_de.not_accessible = 'Der Inhalt ist nicht mehr sichtbar.'
 locale_it.not_accessible = 'Questo contenuto non è più accessibile.'
 
 # VIEW
-locale_en.view = 'View'
+locale_en.view = '👀 View'
 locale_de.view = '👀 Ansehen'
-locale_it.view = 'Vedi'
+locale_it.view = '👀 Vedi'
 
 # AND_CONNECTOR
 locale_en.and_connector = 'and'
-locale_de.and_connector = 'und'
+locale_de.and_connector = '&'
 locale_it.and_connector = 'e'
