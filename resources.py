@@ -56,9 +56,9 @@ class Keyboards:
                 types.InlineKeyboardButton('🌐 Official Bot Repo', url='https://github.com/undrcrxwn/hidethisbot')]])
 class Media:
     def group_greeting_sticker_id(self):
-        return random.choice(('CAACAgIAAxkBAAECkihg7Y5tYnlKz9jRe6QCNOyvEZri2wACSQ4AAliyaUuDPYCgY_2GXiAE',
-                              'CAACAgIAAxkBAAECkilg7Y5tzJPtIX4UMDgYaoxD6zcrogAC8Q0AAvMraEvkpXQDG5qEbyAE',
-                              'CAACAgIAAxkBAAECkipg7Y5tQk6MZlccqoudX9PEnxPbUwACfBAAAhJpcEuU9SdfdRAPdiAE'))
+        return random.choice(('CAACAgIAAxkBAAEpCbphK_C_---mCsuQDAkH1L7Efjx6HAACwQ0AAv86UUvmahUYxf0RgiAE',
+                              'CAACAgIAAxkBAAEpCb9hK_DbX8gXxdXD-w_ZOj0GM2Et_wACRRIAAu8nWEt3iTB_7h6DdCAE',
+                              'CAACAgIAAxkBAAEpCcFhK_DvPmbR3gi-fp4oKe7OXgsBTwACZQ4AAuB3WEvVwmBch1xaqSAE'))
 
 class Resources:
     def __init__(self, locales: LocalesDict):
