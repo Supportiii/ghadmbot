@@ -60,20 +60,20 @@ locale_it.group_greeting_message = (
 
 # INFO_MESSAGE
 locale_en.info_message = (
-        'If you still have questions after reading the article, you can contact support or simply ask '
-        'for help in our public chat at any time you want.\n\n'
+        '👋 <b>Hello! I am @TGInlineBot with this bot you can send messages in a group privately to a user or except one user '
+        'and if you want you can also send spoilers! Read my guide using the buttons below</b>.\n\n'
         '👥 Chat: @iSupGr\n'
         '🆘 Support: @iSupGr')
 locale_de.info_message = (
-        'Solltest du Fragen haben, nachdem du die Hilfe gelesen hast, kannst du in die Support Gruppe schreiben.'
-        'für Hilfe in unserem öffentlichen Chat, wann immer du willst.\n\n'
+        '👋 <b>Hallo! Ich bin @TGInlineBot. Mit diesem Bot kannst du Nachrichten in einer Gruppe privat an einen Nutzer oder an alle bis auf einen Nutzer senden '
+        'und wenn du willst kannst du auch Spoiler senden! Lies einfach meine Anleitung über die Buttons unten</b>.\n\n'
         '👥 Chat: @iSupGr\n'
         '🆘 Support: @iSupGr')
 locale_it.info_message = (
-         'Se hai ancora domande dopo aver letto questo articolo, puoi contattare il supporto nella nostra '
-         'chat pubblica quando vuoi.\n\n'
-         '👥 Chat: @iSupGr\n'
-         '🆘 Support: @iSupGr')
+        '👋 <b>Ciao! Io sono @TGInlineBot con questo bot puoi inviare messaggi in gruppo in privato ad un utente o tranne un utente '
+        'e se vuoi puoi anche inviare spoiler! Leggi la mia guida usando i pulsanti qui sotto</b>.\n\n'
+        '👥 Chat: @iSupGr\n'
+        '🆘 Support: @iSupGr')
 
 # HOW_TO_USE
 locale_en.how_to_use = 'How to use this bot?'
