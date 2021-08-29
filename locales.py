@@ -54,7 +54,7 @@ locale_it.spoiler_message = 'Messaggio contenente spoiler.'
 locale_en.group_greeting_message = (
         '👋 Hi! My name is %s and I can help you send private messages that only certain people can view. '
         'To learn more send /start@%s and feel free to ask for help in our '
-        '<a href="t.me/hidethisbot_chat">public community</a> if you\'ve got any questions.')
+        '<a href="t.me/iSupGr">Supportiiis">public community</a> if you\'ve got any questions.')
 locale_de.group_greeting_message = (
         '👋 Hallo! Mein Name ist @TGinlineBot und ich kann dir dabei helfen, private Nachrichten zu versenden, die nur bestimmte Personen sehen können. '
         'Drücke auf /start, um mehr zu erfahren und tritt unserer Support Gruppe bei.'
@@ -62,14 +62,14 @@ locale_de.group_greeting_message = (
 locale_it.group_greeting_message = (
         '👋 Ciao! Il mio nome è %s E posso aiutarti ad inviare messaggi privati che solo alcuni possono vedere. '
         'per sapere di più invia /start@%s e sentiti libero di chiedere aiuto '
-        '<a href="t.me/hidethisbot_chat">gruppo pubblico</a> se hai domande.')
+        '<a href="t.me/iSupGr">Supportiiis">gruppo pubblico</a> se hai domande.')
 
 # INFO_MESSAGE
 locale_en.info_message = (
         'If you still have questions after reading the article, you can contact support or simply ask '
         'for help in our public chat at any time you want.\n\n'
-        '👥 Public chat: @hidethisbot_chat\n'
-        '⚙ Support: @undrcrxwn')
+        '👥 Chat: @iSupGr\n'
+        '🆘 Support: @iSupGr')
 locale_de.info_message = (
         'Solltest du Fragen haben, nachdem du die Hilfe gelesen hast, kannst du in die Support Gruppe schreiben.'
         'für Hilfe in unserem öffentlichen Chat, wann immer du willst.\n\n'
@@ -78,8 +78,8 @@ locale_de.info_message = (
 locale_it.info_message = (
          'Se hai ancora domande dopo aver letto questo articolo, puoi contattare il supporto nella nostra '
          'chat pubblica quando vuoi.\n\n'
-         '👥 Gruppo pubblico: @hidethisbot_chat\n'
-         '⚙ Supporto: @undrcrxwn')
+         '👥 Chat: @iSupGr\n'
+         '🆘 Support: @iSupGr')
 
 # HOW_TO_USE
 locale_en.how_to_use = 'How to use this bot?'
