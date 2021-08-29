@@ -58,9 +58,7 @@ locale_de.group_greeting_message = (
         'Drücke auf /start, um mehr zu erfahren und tritt unserer Support Gruppe bei.'
         '<a href="t.me/iSupGr">Supportiiis Gruppe</a> wenn du Fragen hast.')
 locale_it.group_greeting_message = (
-        '👋 Ciao! Il mio nome è %s E posso aiutarti ad inviare messaggi privati che solo alcuni possono vedere. '
-        'per sapere di più invia /start@%s e sentiti libero di chiedere aiuto '
-        '<a href="t.me/iSupGr">Supportiiis">gruppo pubblico</a> se hai domande.')
+        '👋 <b>Ciao! Io sono @TGInlineBot con questo bot puoi inviare messaggi in gruppo in privato ad un utente o tranne un utente e se vuoi puoi anche inviare spoiler! Leggi la mia guida usando i pulsanti qui sotto.</b>')
 
 # INFO_MESSAGE
 locale_en.info_message = (
