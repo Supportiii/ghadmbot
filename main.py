@@ -195,7 +195,7 @@ async def callback_query(call: types.CallbackQuery):
                 .replace('{pid}', '#' + post_id)
                 .replace('{ts}', str(creation_time))                          
                 .replace('{now}''{jetzt}', str(datetime.now()))                          
-                .replace('{date}''{datum}', datetime.now().strftime('%Y-%m-%d'))                         
+                .replace('{date}''{datum}', datetime.now().strftime('%d-.%m-.%Y'))                         
                 .replace('{time}''{zeit}', datetime.now().strftime('%H:%M')),
                 True)
         else:
