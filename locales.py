@@ -63,17 +63,17 @@ locale_en.info_message = (
         '👋 Hello! I am @TGInlineBot with this bot you can send messages in a group privately to a user or except one user '
         'and if you want you can also send spoilers! Read my guide using the buttons below.\n\n'
         '👥 Chat: @iSupGr\n'
-        '🆘 Support: @iSuppoitBot')
+        '🆘 Support: @iSupportiBot')
 locale_de.info_message = (
         '👋 Hallo! Ich bin @TGInlineBot. Mit diesem Bot kannst du Nachrichten in einer Gruppe privat an einen Nutzer oder an alle bis auf einen Nutzer senden '
         'und wenn du willst kannst du auch Spoiler senden! Lies einfach meine Anleitung über die Buttons unten.\n\n'
         '👥 Chat: @iSupGr\n'
-        '🆘 Support: @iSuppoitBot')
+        '🆘 Support: @iSupportiBot')
 locale_it.info_message = (
         '👋 Ciao! Io sono @TGInlineBot con questo bot puoi inviare messaggi in gruppo in privato ad un utente o tranne un utente '
         'e se vuoi puoi anche inviare spoiler! Leggi la mia guida usando i pulsanti qui sotto.\n\n'
         '👥 Chat: @iSupGr\n'
-        '🆘 Support: @iSuppoitBot')
+        '🆘 Support: @iSupportiBot')
 
 # HOW_TO_USE
 locale_en.how_to_use = '🤔 How to use this bot?'
