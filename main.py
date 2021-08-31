@@ -188,20 +188,15 @@ async def callback_query(call: types.CallbackQuery):
         if access_granted:
             logger.info('#' + post_id + ': ' + get_formatted_username_or_id(target) + ' - access granted')
             await bot.answer_callback_query(call.id, body
-                .replace('{username}', get_formatted_username_or_id(target))
-                .replace('{nutzername}', get_formatted_username_or_id(target))
-                .replace('{name}', target.full_name)                         
-                .replace('{uid}', 'id' + str(target.id))
-                .replace('{id}', 'id' + str(target.id))                            
+                .replace('{username}''{nutzername}', get_formatted_username_or_id(target))
+                .replace('{name}''{Name}', target.full_name)                         
+                .replace('{uid}''{id}', 'id' + str(target.id))                          
                 .replace('{lang}''{sprache}', 'unknown' if target.language_code is None else target.language_code)
                 .replace('{pid}', '#' + post_id)
                 .replace('{ts}', str(creation_time))                          
-                .replace('{now}', str(datetime.now()))
-                .replace('{jetzt}', str(datetime.now()))                           
-                .replace('{date}', datetime.now().strftime('%Y-%m-%d'))
-                .replace('{datum}', datetime.now().strftime('-%d.-%m.-%Y'))                           
-                .replace('{time}', datetime.now().strftime('%H:%M'))
-                .replace('{zeit}', datetime.now().strftime('%H:%M')),
+                .replace('{now}''{jetzt}', str(datetime.now()))                          
+                .replace('{date}''{datum}', datetime.now().strftime('%Y-%m-%d'))                         
+                .replace('{time}''{zeit}', datetime.now().strftime('%H:%M'))
                 True)
         else:
             logger.info('#' + post_id + ': ' + get_formatted_username_or_id(target) + ' - access denied')
