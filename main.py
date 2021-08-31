@@ -189,7 +189,7 @@ async def callback_query(call: types.CallbackQuery):
             logger.info('#' + post_id + ': ' + get_formatted_username_or_id(target) + ' - access granted')
             await bot.answer_callback_query(call.id, body
                 .replace('{username}''{nutzername}', get_formatted_username_or_id(target))
-                .replace('{name}', target.full_name)                         
+                .replace('{name}''{Name}', target.full_name)                         
                 .replace('{uid}''{id}', 'id' + str(target.id))                          
                 .replace('{lang}''{sprache}', 'unknown' if target.language_code is None else target.language_code)
                 .replace('{pid}', '#' + post_id)
