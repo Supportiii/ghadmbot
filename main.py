@@ -196,7 +196,7 @@ async def callback_query(call: types.CallbackQuery):
                 .replace('{ts}', str(creation_time))                          
                 .replace('{now}''{jetzt}', str(datetime.now()))                          
                 .replace('{date}''{datum}', datetime.now().strftime('%Y-%m-%d'))                         
-                .replace('{time}''{zeit}', datetime.now().strftime('%H:%M'))
+                .replace('{time}''{zeit}', datetime.now().strftime('%H:%M')),
                 True)
         else:
             logger.info('#' + post_id + ': ' + get_formatted_username_or_id(target) + ' - access denied')
