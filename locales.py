@@ -46,7 +46,7 @@ locale_de.except_message = '🤡 Private Nachricht an alle außer %s.'
 locale_it.except_message = '🤡 Messaggio privato per tutti tranne %s.'
 
 # SPOILER_MESSAGE
-locale_en.spoiler_message = '🌐 Public spoiler message.'
+locale_en.spoiler_message = '🌐 Public spoiler message:'
 locale_de.spoiler_message = '🌐 Post für alle:'
 locale_it.spoiler_message = '🌐 Messaggio contenente spoiler.'
 
@@ -61,19 +61,13 @@ locale_it.group_greeting_message = (
 # INFO_MESSAGE
 locale_en.info_message = (
         '👋 Hello! I am @TGInlineBot with this bot you can send messages in a group privately to a user or except one user '
-        'and if you want you can also send spoilers! Read my guide using the buttons below.\n\n'
-        '👥 Chat: @iSupGr\n'
-        '🆘 Support: @iSupportiBot')
+        'and if you want you can also send spoilers! Read my guide using the buttons below.')
 locale_de.info_message = (
         '👋 Hallo! Ich bin @TGInlineBot. Mit diesem Bot kannst du Nachrichten in einer Gruppe privat an einen Nutzer oder an alle bis auf einen Nutzer senden '
-        'und wenn du willst kannst du auch Spoiler senden! Lies einfach meine Anleitung über die Buttons unten.\n\n'
-        '👥 Chat: @iSupGr\n'
-        '🆘 Support: @iSupportiBot')
+        'und wenn du willst kannst du auch Spoiler senden! Lies einfach meine Anleitung über die Buttons unten.')
 locale_it.info_message = (
         '👋 Ciao! Io sono @TGInlineBot con questo bot puoi inviare messaggi in gruppo in privato ad un utente o tranne un utente '
-        'e se vuoi puoi anche inviare spoiler! Leggi la mia guida usando i pulsanti qui sotto.\n\n'
-        '👥 Chat: @iSupGr\n'
-        '🆘 Support: @iSupportiBot')
+        'e se vuoi puoi anche inviare spoiler! Leggi la mia guida usando i pulsanti qui sotto.')
 
 # HOW_TO_USE
 locale_en.how_to_use = '🤔 How to use this bot?'
@@ -86,9 +80,9 @@ locale_de.too_long_description = 'Bitte fasse dich etwas kürzer und überschrei
 locale_it.too_long_description = 'Perfavore accorcia la lunghezza del tuo messaggio in modo che non superi i 200 caratteri.'
 
 # NOT_ALLOWED
-locale_en.not_allowed = 'You are not allowed to view this content.'
+locale_en.not_allowed = '❌ You are not allowed to view this content.'
 locale_de.not_allowed = '❌ Nope, das ist nicht für dich.'
-locale_it.not_allowed = 'Non hai il permesso per vedere questo messaggio.'
+locale_it.not_allowed = '❌ Non hai il permesso per vedere questo messaggio.'
 
 # NOT_ACCESSIBLE
 locale_en.not_accessible = 'This content is no longer accessible.'
