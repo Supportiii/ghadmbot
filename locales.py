@@ -37,17 +37,17 @@ locale_it.too_long_message = '🥺 Mi dispiace, il tuo messaggio non può essere
 
 # FOR_MESSAGE
 locale_en.for_message = '🌚 Private message for %s.'
-locale_de.for_message = '🌚 Private Nachricht an %s.'
+locale_de.for_message = '🌚 Private Nachricht für %s.'
 locale_it.for_message = '🌚 Messaggio privato per %s.'
 
 # EXCEPT_MESSAGE
 locale_en.except_message = '🤡 Private message for everyone except %s.'
-locale_de.except_message = '🤡 Private Nachricht an alle ausser %s.'
+locale_de.except_message = '🤡 Private Nachricht an alle außer %s.'
 locale_it.except_message = '🤡 Messaggio privato per tutti tranne %s.'
 
 # SPOILER_MESSAGE
 locale_en.spoiler_message = '🌐 Public spoiler message.'
-locale_de.spoiler_message = '🌐 Öffentlicher Post:'
+locale_de.spoiler_message = '🌐 Post für alle:'
 locale_it.spoiler_message = '🌐 Messaggio contenente spoiler.'
 
 # GROUP_GREETING_MESSAGE
@@ -87,7 +87,7 @@ locale_it.too_long_description = 'Perfavore accorcia la lunghezza del tuo messag
 
 # NOT_ALLOWED
 locale_en.not_allowed = 'You are not allowed to view this content.'
-locale_de.not_allowed = 'Nope, das ist nicht für dich.'
+locale_de.not_allowed = '❌ Nope, das ist nicht für dich.'
 locale_it.not_allowed = 'Non hai il permesso per vedere questo messaggio.'
 
 # NOT_ACCESSIBLE
