@@ -50,12 +50,12 @@ class QueryResults:
 class Keyboards:
     def info_keyboard(self):
         return types.InlineKeyboardMarkup(inline_keyboard=
-              [[types.InlineKeyboardButton('📣 Channel',           url='https://t.me/iSupCh'),
-                types.InlineKeyboardButton('👥 Group',             url='https://t.me/iSupGr'),
-                types.InlineKeyboardButton('👷 Tests',             url='https://t.me/iTestGroups')],
-               [types.InlineKeyboardButton('📝 HowTo',             url='https://telegra.ph/TGi-08-29')],
+              [[types.InlineKeyboardButton('📝 HowTo',             url='https://telegra.ph/TGi-08-29')],
                [types.InlineKeyboardButton('🌐 Official Bot Repo', url='https://github.com/undrcrxwn/hidethisbot'),
-                types.InlineKeyboardButton('🌐 My Bot Repo',       url='https://github.com/Supportiii/hidethisbot')]])
+                types.InlineKeyboardButton('🌐 My Bot Repo',       url='https://github.com/Supportiii/hidethisbot')],
+               [types.InlineKeyboardButton('📣 Channel',           url='https://t.me/iSupCh'),
+                types.InlineKeyboardButton('👥 Group',             url='https://t.me/iSupGr'),
+                types.InlineKeyboardButton('👷 TestGroups',        url='https://t.me/iTestGroups')]])
     
 class Media:
     def group_greeting_sticker_id(self):
