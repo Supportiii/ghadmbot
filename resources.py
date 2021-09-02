@@ -54,7 +54,7 @@ class Keyboards:
                 types.InlineKeyboardButton('👥 Group',             url='https://t.me/iSupGr'),
                 types.InlineKeyboardButton('👷 Tests',             url='https://t.me/iTestGroups')],
                [types.InlineKeyboardButton('📝 HowTo',             url='https://telegra.ph/TGi-08-29')],
-               [types.InlineKeyboardButton('🌐 Official Bot Repo', url='https://github.com/undrcrxwn/hidethisbot')
+               [types.InlineKeyboardButton('🌐 Official Bot Repo', url='https://github.com/undrcrxwn/hidethisbot'),
                 types.InlineKeyboardButton('🌐 My Bot Repo',       url='https://github.com/Supportiii/hidethisbot')]])
     
 class Media:
