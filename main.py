@@ -32,7 +32,7 @@ async def cmd_id(message: types.Message):
     if message.chat.id == message.from_user.id:
         await message.answer(f"👤 Your TG ID is {message.from_user.id}")
     else:
-        await message.answer(f"👥 This {message.chat.type} chat ID is {message.chat.id}.\n 👤 Your ID is {message.from_user.id}.")
+        await message.answer(f"👥 This <code>{message.chat.type}</code> chat ID is {message.chat.id}.\n👤 Your ID is <code>{message.from_user.id}</code>.")
     
 def ignore(chat_id, timeout):
     ignored_chat_ids.add(chat_id)
