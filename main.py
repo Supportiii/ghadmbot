@@ -23,6 +23,18 @@ connection = psycopg2.connect(os.environ['DATABASE_URL'], sslmode = 'require')
 bot = Bot(token = os.environ['API_TOKEN'])
 dp = Dispatcher(bot)
 
+@dp.message_handler(commands="id")
+async def cmd_id(message: types.Message):
+    """
+    /id command handler for all chats
+    :param message: Telegram message with "/id" command
+    """
+    if message.chat.id == message.from_user.id:
+        await message.answer(f"Your Telegram ID is <code>{message.from_user.id}</code>")
+    else:
+        await message.answer(f"This {message.chat.type} chat ID is <code>{message.chat.id}</code>")
+    logs.track("/id")
+    
 def ignore(chat_id, timeout):
     ignored_chat_ids.add(chat_id)
     time.sleep(timeout)
