@@ -56,20 +56,6 @@ async def get_user_id_no_privacy(message: types.Message):
     if message.sticker:
         msg += f"\nAlso this sticker's ID is <code>{message.sticker.file_id}</code>"
     await message.reply(msg)
-    logs.track("Check user or bot")    
-    
-    
-    @dp.message_handler(lambda message: message.forward_sender_name, content_types=types.ContentTypes.ANY)
-async def get_user_id_with_privacy(message: types.Message):
-    """
-    Handler for message forwarded from other user who hides their ID
-    :param message: Telegram message with "forward_sender_name" field not empty
-    """
-    msg = f"This user decided to <b>hide</b> their ID.\n\nLearn more about this feature " \
-        f"<a href=\"https://telegram.org/blog/unsend-privacy-emoji#anonymous-forwarding\">here</a>."
-    if message.sticker:
-        msg += f"\n\nAlso this sticker's ID is <code>{message.sticker.file_id}</code>"
-    await message.reply(msg)
     logs.track("Check user or bot")
 
 
