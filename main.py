@@ -18,7 +18,7 @@ from aiogram.utils.exceptions import BotBlocked, TelegramAPIError
 from os import getenv
 from sys import exit
 import logs
-from filters import IsGroupJoin
+from filters.py import IsGroupJoin
 
 logger.add(os.environ['LOG_PATH'], level = 'DEBUG')
 rsc = Resources(locales)
