@@ -26,9 +26,9 @@ dp = Dispatcher(bot)
 @dp.message_handler(commands="id")
 async def cmd_id(message: types.Message):
     if message.chat.id == message.from_user.id:
-        await message.answer(f"Your Telegram ID is {message.from_user.id}")
+        await message.answer(f"👤 Your TG ID is {message.from_user.id}")
     else:
-        await message.answer(f"This {message.chat.type} chat ID is {message.chat.id} and your ID is {message.from_user.id}.")
+        await message.answer(f"👥 This {message.chat.type} chat ID is {message.chat.id}.\n 👤 Your ID is {message.from_user.id}.")
     
 def ignore(chat_id, timeout):
     ignored_chat_ids.add(chat_id)
