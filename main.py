@@ -22,7 +22,7 @@ ignored_chat_ids = set()
 connection = psycopg2.connect(os.environ['DATABASE_URL'], sslmode = 'require')
 bot = Bot(token = os.environ['API_TOKEN'])
 dp = Dispatcher(bot)
-
+##################################
 @dp.message_handler(commands="id")
 async def cmd_id(message: types.Message):
     """
@@ -34,6 +34,75 @@ async def cmd_id(message: types.Message):
     else:
         await message.answer(f"This {message.chat.type} chat ID is <code>{message.chat.id}</code>")
     logs.track("/id")
+
+@dp.message_handler(lambda message: message.forward_from, content_types=types.ContentTypes.ANY)
+async def get_user_id_no_privacy(message: types.Message):
+    """
+    Handler for message forwarded from other user who doesn't hide their ID
+    :param message: Telegram message with "forward_from" field not empty
+    """
+    if message.forward_from.is_bot:
+        msg = f"This bot's ID is <code>{message.forward_from.id}</code>"
+    else:
+        msg = f"This user's ID is <code>{message.forward_from.id}</code>"
+    if message.sticker:
+        msg += f"\nAlso this sticker's ID is <code>{message.sticker.file_id}</code>"
+    await message.reply(msg)
+    logs.track("Check user or bot")    
+    
+    
+    @dp.message_handler(lambda message: message.forward_sender_name, content_types=types.ContentTypes.ANY)
+async def get_user_id_with_privacy(message: types.Message):
+    """
+    Handler for message forwarded from other user who hides their ID
+    :param message: Telegram message with "forward_sender_name" field not empty
+    """
+    msg = f"This user decided to <b>hide</b> their ID.\n\nLearn more about this feature " \
+        f"<a href=\"https://telegram.org/blog/unsend-privacy-emoji#anonymous-forwarding\">here</a>."
+    if message.sticker:
+        msg += f"\n\nAlso this sticker's ID is <code>{message.sticker.file_id}</code>"
+    await message.reply(msg)
+    logs.track("Check user or bot")
+
+
+@dp.my_chat_member_handler(is_group_join=True)
+async def new_chat(update: types.ChatMemberUpdated):
+    """
+    Handler bot being added to group or supergroup
+    :param update: Update of type ChatMemberUpdated, where old_chat_member.status is "left",
+        new_chat_member.status is "member" and chat.type is either "group" or "supergroup"
+    """
+    await update.bot.send_message(update.chat.id, f"This {update.chat.type} chat ID is <code>{update.chat.id}</code>")
+    logs.track("Added to group")
+
+    
+@dp.message_handler(content_types=["migrate_to_chat_id"])
+async def group_upgrade_to(message: types.Message):
+    """
+    When group is migrated to supergroup, sends new chat ID.
+    Notice that the first argument of send_message is message.migrate_to_chat_id, not message.chat.id!
+    Otherwise, MigrateChat exception will raise
+    :param message: Telegram message with "migrate_to_chat_id" field not empty
+    """
+    await bot.send_message(message.migrate_to_chat_id, f"Group upgraded to supergroup.\n"
+                                                       f"Old ID: <code>{message.chat.id}</code>\n"
+                                                       f"New ID: <code>{message.migrate_to_chat_id}</code>")
+    logs.track("Group migrate")
+
+
+@dp.message_handler(chat_type=types.ChatType.PRIVATE, content_types=types.ContentTypes.ANY)
+async def private_chat(message: types.Message):
+    """
+    Handler for messages in private chat (one-to-one dialogue)
+    :param message: Telegram message sent to private chat (one-to-one dialogue)
+    """
+    msg = f"Your Telegram ID is <code>{message.chat.id}</code>"
+    if message.sticker:
+        msg += f"\n\nAlso this sticker's ID is <code>{message.sticker.file_id}</code>"
+    await message.reply(msg)
+    logs.track("Any message in PM")
+######################################
+    
     
 def ignore(chat_id, timeout):
     ignored_chat_ids.add(chat_id)
