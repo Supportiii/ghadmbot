@@ -12,6 +12,10 @@ from loguru import logger
 from locales import locales
 from resources import Resources
 
+bot = Bot(token, parse_mode=HTML)
+then
+await bot.send_message(chat_id, formatted_text)
+
 logger.add(os.environ['LOG_PATH'], level = 'DEBUG')
 rsc = Resources(locales)
 
