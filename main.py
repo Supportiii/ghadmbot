@@ -31,16 +31,17 @@ dp = Dispatcher(bot)
 async def cmd_id(message: types.Message):
     if message.chat.id == message.from_user.id:
         await bot.send_message(message.chat.id,
-              text = locales[message.from_user.language_code].id_message
-               % (bot_user.full_name, bot_user.username),
-               parse_mode = 'html',
-               disable_web_page_preview = True)
+                               text = locales[message.from_user.language_code].id_message
+                                    % (bot_user.full_name, bot_user.username),
+                               parse_mode = 'html',
+                               disable_web_page_preview = True)
     else:
         await bot.send_message(message.chat.id,
-              text = locales[message.from_user.language_code].id_message_group
-               % (bot_user.full_name, bot_user.username),
-               parse_mode = 'html',
-               disable_web_page_preview = True)
+                               text = locales[message.from_user.language_code].id_message_group
+                                    % (bot_user.full_name, bot_user.username),
+                               parse_mode = 'html',
+                               disable_web_page_preview = True)
+
     
 def ignore(chat_id, timeout):
     ignored_chat_ids.add(chat_id)
