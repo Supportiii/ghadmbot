@@ -108,3 +108,8 @@ locale_it.id_message_group = 'e'
 locale_en.id_message = '👤 Your TG ID is {message.from_user.id}'
 locale_de.id_message = '👤 Your TG ID is {message.from_user.id}'
 locale_it.id_message = '👤 Your TG ID is {message.from_user.id}'
+
+# ID_MESSAGE_GROUP
+locale_en.id_message = '👥 This {message.chat.type} chat ID is {message.chat.id}.\n👤 Your ID is {message.from_user.id}.'
+locale_de.id_message = '👥 This {message.chat.type} chat ID is {message.chat.id}.\n👤 Your ID is {message.from_user.id}.'
+locale_it.id_message = '👥 This {message.chat.type} chat ID is {message.chat.id}.\n👤 Your ID is {message.from_user.id}.'
