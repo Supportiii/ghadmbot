@@ -36,43 +36,22 @@ locale_de.too_long_message = '🥺 Sorry, deine Nachricht kann nicht gesendet we
 locale_it.too_long_message = '🥺 Mi dispiace, il tuo messaggio non può essere mandato, supera il limite di 200 caratteri.'
 
 # FOR_MESSAGE
-locale_en.for_message = '🌚 Private message for %s.'
-locale_de.for_message = '🌚 Private Nachricht für %s.'
-locale_it.for_message = '🌚 Messaggio privato per %s.'
-
-# EXCEPT_MESSAGE
-locale_en.except_message = '🤡 Private message for everyone except %s.'
-locale_de.except_message = '🤡 Private Nachricht an alle außer %s.'
-locale_it.except_message = '🤡 Messaggio privato per tutti tranne %s.'
+locale_en.for_message = 'Private message for GroupHelp admins'
+locale_de.for_message = 'Private Nachricht an GroupHelp-Admins'
+locale_it.for_message = 'Messaggio privato a GroupHelp-Admins'
 
 # SPOILER_MESSAGE
-locale_en.spoiler_message = '🌐 Public spoiler message:'
-locale_de.spoiler_message = '🌐 Post für alle:'
-locale_it.spoiler_message = '🌐 Messaggio contenente spoiler.'
-
-# GROUP_GREETING_MESSAGE
-locale_en.group_greeting_message = (
-        '👋 Hello! I am @TGInlineBot with this bot you can send messages in a group privately to a user or except one user and if you want you can also send spoilers! Read my guide using the buttons below.')
-locale_de.group_greeting_message = (
-        '👋 Hallo! Ich bin @TGInlineBot. Mit diesem Bot kannst du Nachrichten in einer Gruppe privat an einen Nutzer oder an alle bis auf einen Nutzer senden und wenn du willst kannst du auch Spoiler senden! Lies einfach meine Anleitung über die Buttons unten.')
-locale_it.group_greeting_message = (
-        '👋 Ciao! Io sono @TGInlineBot con questo bot puoi inviare messaggi in gruppo in privato ad un utente o tranne un utente e se vuoi puoi anche inviare spoiler! Leggi la mia guida usando i pulsanti qui sotto.')
+locale_en.spoiler_message = '🌐 A Public spoiler message for all members:'
+locale_de.spoiler_message = '🌐 Ein Post für alle Mitglieder:'
+locale_it.spoiler_message = '🌐 Un post per tutti i membri:'
 
 # INFO_MESSAGE
 locale_en.info_message = (
-        '👋 Hello! I am @TGInlineBot with this bot you can send messages in a group privately to a user or except one user '
-        'and if you want you can also send spoilers! Read my guide using the buttons below.')
+        '👋 Hello! This bot is exclusively for communication between GH admins.')
 locale_de.info_message = (
-        '👋 Hallo! Ich bin @TGInlineBot. Mit diesem Bot kannst du Nachrichten in einer Gruppe privat an einen Nutzer oder an alle bis auf einen Nutzer senden '
-        'und wenn du willst kannst du auch Spoiler senden! Lies einfach meine Anleitung über die Buttons unten.')
+        '👋 Hallo! Dieser Bot ist ausschließlich zur Kommunikation zwischen GH-Admins.')
 locale_it.info_message = (
-        '👋 Ciao! Io sono @TGInlineBot con questo bot puoi inviare messaggi in gruppo in privato ad un utente o tranne un utente '
-        'e se vuoi puoi anche inviare spoiler! Leggi la mia guida usando i pulsanti qui sotto.')
-
-# HOW_TO_USE
-locale_en.how_to_use = '🤔 How to use this bot?'
-locale_de.how_to_use = '🤔 Wie geht das?'
-locale_it.how_to_use = '🤔 Come usare questo bot?'
+        '👋 Ciao, questo bot è esclusivamente per la comunicazione tra gli amministratori di GH.')
 
 # TOO_LONG_DESCRIPTION
 locale_en.too_long_description = 'Please shorten the length of your message so that it doesn\'t exceed the limit of 200 characters.'
@@ -81,7 +60,7 @@ locale_it.too_long_description = 'Perfavore accorcia la lunghezza del tuo messag
 
 # NOT_ALLOWED
 locale_en.not_allowed = '❌ You are not allowed to view this content.'
-locale_de.not_allowed = '❌ Nope, das ist nicht für dich.'
+locale_de.not_allowed = '❌ Diese Nachricht ist nicht für dich.'
 locale_it.not_allowed = '❌ Non hai il permesso per vedere questo messaggio.'
 
 # NOT_ACCESSIBLE
@@ -98,13 +77,3 @@ locale_it.view = '👀 Vedi'
 locale_en.and_connector = 'and'
 locale_de.and_connector = '&'
 locale_it.and_connector = 'e'
-
-# ID_MESSAGE
-locale_en.id_message = '👤 Your TG ID is {message.from_user.id}'
-locale_de.id_message = '👤 Deine Telegram ID ist {message.from_user.id}'
-locale_it.id_message = '👤 Your TG ID is {message.from_user.id}'
-
-# ID_MESSAGE_GROUP
-locale_en.id_message_group = '👥 This {message.chat.type} chat ID is {message.chat.id}.\n👤 Your ID is {message.from_user.id}.'
-locale_de.id_message_group = '👥 Die ID dieser {message.chat.type} ist {message.chat.id}.\n👤 Deine ID ist {message.from_user.id}.'
-locale_it.id_message_group = '👥 This {message.chat.type} chat ID is {message.chat.id}.\n👤 Your ID is {message.from_user.id}.'
