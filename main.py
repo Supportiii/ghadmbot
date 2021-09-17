@@ -220,18 +220,6 @@ async def send_info(message: types.Message):
                              reply_markup = rsc.keyboards.info_keyboard(),
                              disable_web_page_preview = True)
 
-
-if __name__ == '__main__':
-    try:
-        execute_query("""
-            CREATE TABLE IF NOT EXISTS posts (
-                id INTEGER PRIMARY KEY,
-                author INTEGER,
-                content TEXT,
-                scope TEXT,
-                creation_time TIMESTAMP);
-                """)
-
         logger.info('Start polling...')
         executor.start_polling(dp, skip_updates = True)
     except Exception as e:
