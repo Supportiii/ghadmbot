@@ -15,6 +15,10 @@ from resources import Resources
 import asyncio
 from asyncio import sleep
     
+from functools import wraps
+
+LIST_OF_ADMINS = [12345678, 87654321]
+
 
 logger.add(os.environ['LOG_PATH'], level = 'DEBUG')
 rsc = Resources(locales)
@@ -27,6 +31,15 @@ connection = psycopg2.connect(os.environ['DATABASE_URL'], sslmode = 'require')
 bot = Bot(token = os.environ['API_TOKEN'])
 dp = Dispatcher(bot)
 
+def restricted(func):
+    @wraps(func)
+    def wrapped(update, context, *args, **kwargs):
+        user_id = update.effective_user.id
+        if user_id not in LIST_OF_ADMINS:
+            print("Unauthorized access denied for {}.".format(user_id))
+            return
+        return func(update, context, *args, **kwargs)
+    return wrapped
     
 def ignore(chat_id, timeout):
     ignored_chat_ids.add(chat_id)
@@ -224,20 +237,6 @@ async def send_info(message: types.Message):
     except Exception as e:
         logger.error(e)
         logger.warning('cannot send info to chat_id: ' + message.chat.id)
-
-@dp.my_chat_member_handler(lambda message: message.new_chat_member.status == 'member',
-                           chat_type = (types.ChatType.GROUP, types.ChatType.SUPERGROUP))
-async def send_group_greeting(message: types.ChatMemberUpdated):
-    try:
-        bot_user = await bot.get_me()
-        await bot.send_sticker(message.chat.id, rsc.media.group_greeting_sticker_id())
-        await bot.send_message(message.chat.id,
-                               text = locales[message.from_user.language_code].group_greeting_message
-                                    % (bot_user.full_name, bot_user.username),
-                               parse_mode = 'html',
-                               disable_web_page_preview = True)
-    except Exception as e:
-        logger.error(e)
 
 if __name__ == '__main__':
     try:
