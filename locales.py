@@ -72,8 +72,3 @@ locale_it.not_accessible = 'Questo contenuto non è più accessibile.'
 locale_en.view = '👀 View'
 locale_de.view = '👀 Ansehen'
 locale_it.view = '👀 Vedi'
-
-# AND_CONNECTOR
-locale_en.and_connector = 'and'
-locale_de.and_connector = '&'
-locale_it.and_connector = 'e'
