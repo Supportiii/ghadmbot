@@ -25,16 +25,6 @@ ignored_chat_ids = set()
 connection = psycopg2.connect(os.environ['DATABASE_URL'], sslmode = 'require')
 bot = Bot(token = os.environ['API_TOKEN'])
 dp = Dispatcher(bot)
-
-allowed_ids = [1761434979,2222222]
-
-def handle(msg):
-    sender = msg.from_user['id']
- if sender in allowed_ids:
-       [...]
- else:
-       bot.sendMessage(chat_id, 'Forbidden access!')
-       bot.sendMessage(chat_id, sender)
     
 def ignore(chat_id, timeout):
     ignored_chat_ids.add(chat_id)
