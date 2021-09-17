@@ -17,8 +17,6 @@ from asyncio import sleep
     
 from functools import wraps
 
-LIST_OF_ADMINS = [12345678, 87654321]
-
 
 logger.add(os.environ['LOG_PATH'], level = 'DEBUG')
 rsc = Resources(locales)
@@ -30,6 +28,8 @@ ignored_chat_ids = set()
 connection = psycopg2.connect(os.environ['DATABASE_URL'], sslmode = 'require')
 bot = Bot(token = os.environ['API_TOKEN'])
 dp = Dispatcher(bot)
+
+LIST_OF_ADMINS = [12345678, 87654321]
 
 def restricted(func):
     @wraps(func)
