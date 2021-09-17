@@ -219,9 +219,7 @@ async def send_info(message: types.Message):
         await message.answer(text = locales[message.from_user.language_code].info_message,
                              reply_markup = rsc.keyboards.info_keyboard(),
                              disable_web_page_preview = True)
-    except Exception as e:
-        logger.error(e)
-        logger.warning('cannot send info to chat_id: ' + message.chat.id)
+
 
 if __name__ == '__main__':
     try:
