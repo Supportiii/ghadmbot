@@ -14,9 +14,6 @@ from resources import Resources
 
 import asyncio
 from asyncio import sleep
-    
-from functools import wraps
-
 
 logger.add(os.environ['LOG_PATH'], level = 'DEBUG')
 rsc = Resources(locales)
@@ -29,17 +26,15 @@ connection = psycopg2.connect(os.environ['DATABASE_URL'], sslmode = 'require')
 bot = Bot(token = os.environ['API_TOKEN'])
 dp = Dispatcher(bot)
 
-LIST_OF_ADMINS = [12345678, 87654321]
+allowed_ids = [1761434979,2222222]
 
-def restricted(func):
-    @wraps(func)
-    def wrapped(update, context, *args, **kwargs):
-        user_id = update.effective_user.id
-        if user_id not in LIST_OF_ADMINS:
-            print("Unauthorized access denied for {}.".format(user_id))
-            return
-        return func(update, context, *args, **kwargs)
-    return wrapped
+def handle(msg):
+    sender = msg.from_user['id']
+ if sender in allowed_ids:
+       [...]
+ else:
+       bot.sendMessage(chat_id, 'Forbidden access!')
+       bot.sendMessage(chat_id, sender)
     
 def ignore(chat_id, timeout):
     ignored_chat_ids.add(chat_id)
