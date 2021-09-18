@@ -29,7 +29,7 @@ connection = psycopg2.connect(os.environ['DATABASE_URL'], sslmode = 'require')
 bot = Bot(token = os.environ['API_TOKEN'])
 dp = Dispatcher(bot)
 
-@FayasNoushad.on_message((filters.private | filters.group) & filters.command(["info", "information"]))
+@dp.message_handler((filters.private | filters.group) & filters.command(["info", "information"]))
 async def info(bot, update):
     if (not update.reply_to_message) and ((not update.forward_from) or (not update.forward_from_chat)):
         info = user_info(update.from_user)
