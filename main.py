@@ -213,7 +213,7 @@ async def callback_query(call: types.CallbackQuery):
                        get_formatted_username_or_id(call.from_user) + ' '
                        'with payload: "' + call.data + '"')
 
-@dp.message_handler(commands = ['start', 'help', 'info'])
+@dp.message_handler(commands = ['start', 'help'])
 async def send_info(message: types.Message):
     try:
         if message.chat.id in ignored_chat_ids:
