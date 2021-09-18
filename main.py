@@ -58,7 +58,7 @@ def execute_read_query(query, data = None):
     return result
 
 def get_formatted_username_or_id(user: types.User):
-    return 'id' + str(user.id) if user.username is None else '@' + user.username
+    return '#' + str(user.id) if user.username is None else '@' + user.username
 
 def get_post(post_id: int):
     result = None
