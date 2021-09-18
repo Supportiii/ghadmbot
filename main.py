@@ -29,23 +29,10 @@ connection = psycopg2.connect(os.environ['DATABASE_URL'], sslmode = 'require')
 bot = Bot(token = os.environ['API_TOKEN'])
 dp = Dispatcher(bot)
 
-#####################
 FayasNoushad = Client(
     "Info-Bot",
     api_id = int(os.environ["API_ID"]),
-    api_hash = os.environ["API_HASH"]
-)
-
-@FayasNoushad.on_message(filters.private & filters.command(["dc"]))
-async def start(bot, update):
-    text = START_TEXT.format(update.from_user.mention)
-    reply_markup = BUTTONS
-    await update.reply_text(
-        text=text,
-        disable_web_page_preview=True,
-        reply_markup=reply_markup,
-        quote=True
-    )
+    api_hash = os.environ["API_HASH"])
 
 @FayasNoushad.on_message((filters.private | filters.group) & filters.command(["info", "information"]))
 async def info(bot, update):
@@ -103,8 +90,6 @@ def chat_info(chat):
     text += f"\n**Is Fake:** True" if chat.is_fake else ""
     text += f"\n\nMade by @FayasNoushad"
     return text
-
-FayasNoushad.run()
  
 def ignore(chat_id, timeout):
     ignored_chat_ids.add(chat_id)
@@ -332,3 +317,5 @@ if __name__ == '__main__':
         executor.start_polling(dp, skip_updates = True)
     except Exception as e:
         logger.error(e)
+
+FayasNoushad.run()
