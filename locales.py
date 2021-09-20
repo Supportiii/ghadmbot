@@ -22,7 +22,7 @@ locale_it.for_title = 'Per %s'
 
 # EXCEPT_TITLE
 locale_en.except_title = 'Except %s'
-locale_de.except_title = 'Akzeptiere %s'
+locale_de.except_title = 'Nicht für %s'
 locale_it.except_title = 'Tranne %s'
 
 # SPOILER_TITLE
