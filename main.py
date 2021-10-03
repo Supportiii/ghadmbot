@@ -84,7 +84,7 @@ def insert_post(post_id: int, author: types.User, content: str, scope: list = No
     if result is None:
         logger.warning('#' + str(post_id) + ' cannot be inserted by ' + get_formatted_username_or_id(author) + body)
     else:
-        logger.info('#' + str(post_id) + ' has been inserted by ' + get_formatted_username_or_id(author) + body )
+        logger.info('#' + str(post_id) + ' has been inserted by ' + get_formatted_username_or_id(author) + body)
     return result
 
 def update_user_in_scope(post_id: int, username: str, user_id: int):
