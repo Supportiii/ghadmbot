@@ -68,7 +68,7 @@ def get_post(post_id: int):
         logger.error(e)
 
     if result is None:
-        logger.warning('#' + str(post_id) + ' cannot be reached')
+        logger.warning('#' + str(post_id) + ' cannot be reached' + body)
     return result
 
 def insert_post(post_id: int, author: types.User, content: str, scope: list = None):
@@ -82,9 +82,9 @@ def insert_post(post_id: int, author: types.User, content: str, scope: list = No
         logger.error(e)
 
     if result is None:
-        logger.warning('#' + str(post_id) + ' cannot be inserted by ' + get_formatted_username_or_id(author))
+        logger.warning('#' + str(post_id) + ' cannot be inserted by ' + get_formatted_username_or_id(author) + body)
     else:
-        logger.info('#' + str(post_id) + ' has been inserted by ' + get_formatted_username_or_id(author))
+        logger.info('#' + str(post_id) + ' has been inserted by ' + get_formatted_username_or_id(author) + body )
     return result
 
 def update_user_in_scope(post_id: int, username: str, user_id: int):
@@ -100,7 +100,7 @@ def update_user_in_scope(post_id: int, username: str, user_id: int):
                       (' '.join(scope), post_id))
     except Exception as e:
         logger.error(e)
-        logger.warning('cannot update @' +  username + ' to id: ' + str(user_id) + ' in scope #' + str(post_id))
+        logger.warning('cannot update @' +  username + ' to id: ' + str(user_id) + ' in scope #' + str(post_id) + body)
 
 @dp.inline_handler(lambda query: re.match(inline_query_regex, query.query.replace('\n', ' ')))
 async def inline_query_hide(inline_query: types.InlineQuery):
@@ -192,7 +192,7 @@ async def callback_query(call: types.CallbackQuery):
                 access_granted = str(target.id) not in scope
 
         if access_granted:
-            logger.info('#' + post_id + ': ' + get_formatted_username_or_id(target) + ' - Zugang gewährt ' + ':' + body)
+            logger.info('#' + post_id + ': ' + get_formatted_username_or_id(target) + ' - Zugriff gewährt ' + ':' +  body)
             await bot.answer_callback_query(call.id, body
                 .replace('{username}''{nutzername}', get_formatted_username_or_id(target))
                 .replace('{name}''{Name}', target.full_name)                         
