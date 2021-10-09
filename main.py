@@ -5,107 +5,50 @@ import time
 from datetime import datetime
 from threading import Thread
 
-import psycopg2
 from aiogram import Bot, Dispatcher, executor, types
 from loguru import logger
 
 from locales import locales
+from models import User, Post, PostMode
 from resources import Resources
+from utils import get_formatted_username_or_id
 
-import asyncio
-from asyncio import sleep
-
-from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-
-logger.add(os.environ['LOG_PATH'], level = 'DEBUG')
+logger.add(os.environ['LOG_PATH'])
 rsc = Resources(locales)
 
 inline_query_regex = re.compile(r'^.+([ \n](@\w+|id[0-9]+))+$')
 scope_regex = re.compile(r'([ \n](@\w+|id[0-9]+))+$')
 
 ignored_chat_ids = set()
-connection = psycopg2.connect(os.environ['DATABASE_URL'], sslmode = 'require')
 bot = Bot(token = os.environ['API_TOKEN'])
 dp = Dispatcher(bot)
- 
+
 def ignore(chat_id, timeout):
     ignored_chat_ids.add(chat_id)
     time.sleep(timeout)
     ignored_chat_ids.remove(chat_id)
 
-def execute_query(query, data = None):
-    result = None
+def create_post(author: User, content: str, scope: set = ()):
     try:
-        cursor = connection.cursor()
-        cursor.execute(query, data)
-        connection.commit()
-        result = cursor.fetchall()
+        result = Post.create(
+            author = author,
+            content = content,
+            scope = ' '.join(scope).replace('@', ''),
+            creation_time = datetime.now())
+        logger.info('#' + str(result.get_id()) + ' has been created by ' + get_formatted_username_or_id(author))
+        return result
     except Exception as e:
+        logger.error('new post cannot be created by ' + get_formatted_username_or_id(author))
         logger.error(e)
-        connection.rollback()
-        logger.info('transaction rollback: "' + query + '"')
-    return result
-
-def execute_read_query(query, data = None):
-    result = None
-    try:
-        cursor = connection.cursor()
-        cursor.execute(query, data)
-        result = cursor.fetchall()
-    except Exception as e:
-        logger.error(e)
-    return result
-
-def get_formatted_username_or_id(user: types.User):
-    return '#' + str(user.id) if user.username is None else '@' + user.username
-
-def get_post(post_id: int):
-    result = None
-    try:
-        result = execute_read_query('SELECT * FROM posts WHERE id = %s', (str(post_id),))[0]
-    except Exception as e:
-        logger.error(e)
-
-    if result is None:
-        logger.warning('#' + str(post_id) + ' cannot be reached' + body)
-    return result
-
-def insert_post(post_id: int, author: types.User, content: str, scope: list = None):
-    result = None
-    try:
-        scope_string = '' if scope is None else ' '.join(scope).replace('@', '').lower()
-        result = execute_query('INSERT INTO posts (id, author, content, scope, creation_time) '
-                               'VALUES (%s, %s, %s, %s, NOW()) RETURNING id',
-                               (post_id, author.id, content, scope_string))
-    except Exception as e:
-        logger.error(e)
-
-    if result is None:
-        logger.warning('#' + str(post_id) + ' cannot be inserted by ' + get_formatted_username_or_id(author) + body)
-    else:
-        logger.info('#' + str(post_id) + ' has been inserted by ' + get_formatted_username_or_id(author) + body)
-    return result
-
-def update_user_in_scope(post_id: int, username: str, user_id: int):
-    try:
-        (_, author, body, scope_string, creation_time) = get_post(post_id)
-        scope = scope_string.split(' ')
-        for i, mention in enumerate(scope):
-            if mention == username:
-                scope[i] = str(user_id)
-        execute_query('UPDATE posts '
-                      'SET scope = %s '
-                      'WHERE id = %s;',
-                      (' '.join(scope), post_id))
-    except Exception as e:
-        logger.error(e)
-        logger.warning('cannot update @' +  username + ' to id: ' + str(user_id) + ' in scope #' + str(post_id) + body)
+        return
 
 @dp.inline_handler(lambda query: re.match(inline_query_regex, query.query.replace('\n', ' ')))
 async def inline_query_hide(inline_query: types.InlineQuery):
     try:
-        target = inline_query.from_user
+        target = User.get_or_create(inline_query.from_user)
+        target.inline_queries_count += 1
+        target.save()
+
         body = scope_regex.sub('', inline_query.query)
         if len(body) > 200:
             await inline_query.answer([rsc.query_results.message_too_long(target.language_code)])
@@ -114,8 +57,7 @@ async def inline_query_hide(inline_query: types.InlineQuery):
         raw_scope = re.sub(r'(id)([0-9]+)', r'\g<2>', inline_query.query[len(body) + 1:]).split(' ')
         marker = set()
         scope = [not marker.add(x.casefold()) and x for x in raw_scope if x.casefold() not in marker]
-        post_id = random.randint(0, 100000000)
-        insert_post(post_id, target, body, scope)
+        post = create_post(target, body, set(scope))
 
         formatted_scope = ', '.join(scope[:-1])
         if len(scope) > 1:
@@ -123,196 +65,141 @@ async def inline_query_hide(inline_query: types.InlineQuery):
         else:
             formatted_scope = scope[0]
 
-        await inline_query.answer([rsc.query_results.mode_for(target.language_code, post_id, body, formatted_scope),
-                                   rsc.query_results.mode_except(target.language_code, post_id, body, formatted_scope)],
-                                   cache_time = 0)
+        await inline_query.answer(
+            [rsc.query_results.mode_for(target.language_code, post.get_id(), body, formatted_scope),
+             rsc.query_results.mode_except(target.language_code, post.get_id(), body, formatted_scope)],
+            cache_time = 0)
     except Exception as e:
         logger.error(e)
-        logger.warning('cannot handle inline query hide from ' +
-                       get_formatted_username_or_id(inline_query.from_user) + ' '
-                       'with payload: "' + inline_query.query + '"')
+        logger.warning(
+            'cannot handle inline query hide from ' +
+            get_formatted_username_or_id(inline_query.from_user) +
+            ' with payload: "' + inline_query.query + '"')
 
 @dp.inline_handler(lambda query: len(query.query) > 0)
 async def inline_query_spoiler(inline_query: types.InlineQuery):
     try:
-        target = inline_query.from_user
+        target = User.get_or_create(inline_query.from_user)
+        target.inline_queries_count += 1
+        target.save()
+
         body = inline_query.query
         if len(body) > 200:
             await inline_query.answer([rsc.query_results.message_too_long(target.language_code)])
             return
 
-        post_id = random.randint(0, 100000000)
-        insert_post(post_id, target, body)
-        await inline_query.answer([rsc.query_results.spoiler(target.language_code, post_id, body)])
+        post = create_post(target, body)
+        await inline_query.answer([rsc.query_results.mode_spoiler(target.language_code, post.get_id(), body)])
     except Exception as e:
         logger.error(e)
-        logger.warning('cannot handle inline query spoiler from ' +
-                       get_formatted_username_or_id(inline_query.from_user) + ' '
-                       'with payload: "' + inline_query.query + '"')
+        logger.warning(
+            'cannot handle inline query spoiler from ' +
+            get_formatted_username_or_id(inline_query.from_user) +
+            ' with payload: "' + inline_query.query + '"')
 
 @dp.inline_handler()
 async def inline_query_help(inline_query: types.InlineQuery):
     try:
-        await inline_query.answer([], switch_pm_text = locales[inline_query.from_user.language_code].how_to_use,
-                                  switch_pm_parameter  = 'how_to_use')
+        await inline_query.answer(
+            [], switch_pm_text = locales[inline_query.from_user.language_code].how_to_use,
+            cache_time = 0,
+            switch_pm_parameter  = 'how_to_use')
+        target = User.get_or_create(inline_query.from_user)
+        target.inline_queries_count += 1
+        target.save()
     except Exception as e:
         logger.error(e)
-        logger.warning('cannot handle inline query help from ' +
-                       get_formatted_username_or_id(inline_query.from_user) + ' '
-                       'with payload: "' + inline_query.query + '"')
+        logger.warning(
+            'cannot handle inline query help from ' +
+            get_formatted_username_or_id(inline_query.from_user) +
+            ' with payload: "' + inline_query.query + '"')
 
 @dp.callback_query_handler()
 async def callback_query(call: types.CallbackQuery):
     try:
-        target = call.from_user
         (post_id, mode) = str(call.data).split(' ')
         try:
-            post = get_post(post_id)
+            post = Post.get_by_id(post_id)
         except Exception as e:
-            logger.error(e)
-            logger.warning('#' + post_id + ' cannot be reached by ' + get_formatted_username_or_id(target))
-            await bot.answer_callback_query(call.id, text = locales[target.language_code].not_accessible, show_alert = True)
+            await call.answer(
+                text = locales[call.from_user.language_code].not_accessible,
+                show_alert = True)
             return
 
-        (_, author, body, scope_string, creation_time) = post
-        scope = scope_string.split(' ')
-        access_granted = False
-        if mode == 'spoiler':
-            access_granted = True
-        elif mode == 'for':
-            if target.username and target.username.lower() in scope:
-                access_granted = True
-                update_user_in_scope(post_id, target.username.lower(), target.id)
-            else:
-                access_granted = target.id == author or str(target.id) in scope
-        elif mode == 'except':
-            if target.username and target.username.lower() in scope:
-                update_user_in_scope(post_id, target.username.lower(), target.id)
-            else:
-                access_granted = str(target.id) not in scope
-
-        if access_granted:
-            logger.info('#' + post_id + ': ' + get_formatted_username_or_id(target) + ' - Zugriff gewährt ' + ':' +  body)
-            await bot.answer_callback_query(call.id, body
-                .replace('{username}''{nutzername}', get_formatted_username_or_id(target))
-                .replace('{name}''{Name}', target.full_name)                         
-                .replace('{uid}''{id}', 'id' + str(target.id))                          
-                .replace('{lang}''{sprache}', 'unknown' if target.language_code is None else target.language_code)
+        target = User.get_or_create(call.from_user)
+        if post.can_be_accessed_by(call.from_user, PostMode[mode]):
+            logger.info('#' + post_id + ': ' + get_formatted_username_or_id(call.from_user) + ' - access granted')
+            await call.answer(post.content
+                .replace('{username}', get_formatted_username_or_id(call.from_user))
+                .replace('{uid}', 'id' + str(target.user_id))
+                .replace('{lang}', 'unknown' if target.language_code is None else target.language_code)
                 .replace('{pid}', '#' + post_id)
-                .replace('{ts}', str(creation_time))                          
-                .replace('{now}''{jetzt}', str(datetime.now()))                          
-                .replace('{date}''{datum}', datetime.now().strftime('%d-.%m-.%Y'))                         
-                .replace('{time}''{zeit}', datetime.now().strftime('%H:%M')),
+                .replace('{created}', str(post.creation_time))
+                .replace('{queries}', str(target.inline_queries_count))
+                .replace('{first_interaction}', str(target.first_interaction_time))
+                .replace('{dialog}', 'Yes' if target.has_dialog else 'No')
+                .replace('{utc}', str(datetime.utcnow()))
+                .replace('{date}', datetime.utcnow().strftime('%Y-%m-%d'))
+                .replace('{time}', datetime.utcnow().strftime('%H:%M'))
+                .replace('{name}', call.from_user.full_name)
+                .replace('{first_name}', target.first_name)
+                .replace('{last_name}', '' if target.last_name is None else target.last_name),
                 True)
         else:
-            logger.info('#' + post_id + ': ' + get_formatted_username_or_id(target) + ' - Zugriff verweigert' + ':' + body)
-            await call.answer(locales[target.language_code].not_allowed, True)
+            logger.info('#' + post_id + ': ' + get_formatted_username_or_id(call.from_user) + ' - access denied')
+            await call.answer(locales[call.from_user.language_code].not_allowed, True)
     except Exception as e:
         logger.error(e)
-        logger.warning('cannot handle callback query from ' +
-                       get_formatted_username_or_id(call.from_user) + ' '
-                       'with payload: "' + call.data + '"')
+        logger.warning(
+            'cannot handle callback query from ' +
+            get_formatted_username_or_id(call.from_user) +
+            ' with payload: "' + call.data + '"')
 
-@dp.message_handler(commands = ['start', 'help'])
+@dp.message_handler()
 async def send_info(message: types.Message):
     try:
         if message.chat.id in ignored_chat_ids:
             return
         Thread(target = ignore, args = (message.chat.id, 1)).start()
-        await message.answer(text = locales[message.from_user.language_code].info_message,
-                             reply_markup = rsc.keyboards.info_keyboard(),
-                             disable_web_page_preview = True)
+        is_tracked_user = message.chat.type == types.ChatType.PRIVATE
+
+        command = message.get_command()
+        if (command is not None and
+            command.lower().endswith((await bot.get_me()).username.lower())):
+            command = command.split('@')[0]
+        if command in ['/start', '/help', '/info']:
+            is_tracked_user = True
+            await message.answer(
+                text = locales[message.from_user.language_code].info_message,
+                reply_markup = rsc.keyboards.info_keyboard(),
+                disable_web_page_preview = True)
+        if is_tracked_user:
+            target = User.get_or_create(message.from_user)
+            target.has_dialog = True
+            target.save()
     except Exception as e:
         logger.error(e)
-        logger.warning('cannot send info to chat_id: ' + message.chat.id)
-        
-        
-@dp.message_handler((filters.private | filters.group) & filters.command(["info", "information"]))
-async def info(bot, update):
-    if (not update.reply_to_message) and ((not update.forward_from) or (not update.forward_from_chat)):
-        info = user_info(update.from_user)
-    elif update.reply_to_message and update.reply_to_message.forward_from:
-        info = user_info(update.reply_to_message.forward_from)
-    elif update.reply_to_message and update.reply_to_message.forward_from_chat:
-        info = chat_info(update.reply_to_message.forward_from_chat)
-    elif (update.reply_to_message and update.reply_to_message.from_user) and (not update.forward_from or not update.forward_from_chat):
-        info = user_info(update.reply_to_message.from_user)
-    else:
-        return
-    try:
-        await update.reply_text(
-            text=info,
-            reply_markup=BUTTONS,
-            disable_web_page_preview=True,
-            quote=True
-        )
-    except Exception as error:
-        await update.reply_text(error)
+        logger.warning('cannot send info to chat_id=' + str(message.chat.id))
 
-def user_info(user):
-    text = "--**User Details:**--\n"
-    text += f"\n**First Name:** `{user.first_name}`"
-    text += f"\n**Last Name:** `{user.last_name},`" if user.last_name else ""
-    text += f"\n**User Id:** `{user.id}`"
-    text += f"\n**Username:** @{user.username}" if user.username else ""
-    text += f"\n**User Link:** {user.mention}" if user.username else ""
-    text += f"\n**DC ID:** `{user.dc_id}`" if user.dc_id else ""
-    text += f"\n**Is Deleted:** True" if user.is_deleted else ""
-    text += f"\n**Is Bot:** True" if user.is_bot else ""
-    text += f"\n**Is Verified:** True" if user.is_verified else ""
-    text += f"\n**Is Restricted:** True" if user.is_verified else ""
-    text += f"\n**Is Scam:** True" if user.is_scam else ""
-    text += f"\n**Is Fake:** True" if user.is_fake else ""
-    text += f"\n**Is Support:** True" if user.is_support else ""
-    text += f"\n**Language Code:** {user.language_code}" if user.language_code else ""
-    text += f"\n**Status:** {user.status}" if user.status else ""
-    text += f"\n\nMade by @SupVZ"
-    return text
-
-def chat_info(chat):
-    text = "--**Chat Details**--\n" 
-    text += f"\n**Title:** `{chat.title}`"
-    text += f"\n**Chat ID:** `{chat.id}`"
-    text += f"\n**Username:** @{chat.username}" if chat.username else ""
-    text += f"\n**Type:** `{chat.type}`"
-    text += f"\n**DC ID:** `{chat.dc_id}`"
-    text += f"\n**Is Verified:** True" if chat.is_verified else ""
-    text += f"\n**Is Restricted:** True" if chat.is_verified else ""
-    text += f"\n**Is Creator:** True" if chat.is_creator else ""
-    text += f"\n**Is Scam:** True" if chat.is_scam else ""
-    text += f"\n**Is Fake:** True" if chat.is_fake else ""
-    text += f"\n\nMade by @FayasNoushad"
-    return text
-        
-        
-@dp.my_chat_member_handler(lambda message: message.new_chat_member.status == 'member',
-                           chat_type = (types.ChatType.GROUP, types.ChatType.SUPERGROUP))
+@dp.my_chat_member_handler(
+    lambda message: message.new_chat_member.status == types.ChatMemberStatus.MEMBER,
+    chat_type = (types.ChatType.GROUP, types.ChatType.SUPERGROUP))
 async def send_group_greeting(message: types.ChatMemberUpdated):
     try:
         bot_user = await bot.get_me()
         await bot.send_sticker(message.chat.id, rsc.media.group_greeting_sticker_id())
-        await bot.send_message(message.chat.id,
-                               text = locales[message.from_user.language_code].group_greeting_message
-                                    % (bot_user.full_name, bot_user.username),
-                               parse_mode = 'html',
-                               disable_web_page_preview = True)
+        await bot.send_message(
+            message.chat.id,
+            text = locales[message.from_user.language_code].group_greeting_message
+                   % (bot_user.full_name, bot_user.username),
+            parse_mode = 'html',
+            disable_web_page_preview = True)
     except Exception as e:
         logger.error(e)
 
 if __name__ == '__main__':
     try:
-        execute_query("""
-            CREATE TABLE IF NOT EXISTS posts (
-                id INTEGER PRIMARY KEY,
-                author INTEGER,
-                content TEXT,
-                scope TEXT,
-                creation_time TIMESTAMP);
-                """)
-
         logger.info('Start polling...')
         executor.start_polling(dp, skip_updates = True)
     except Exception as e:
         logger.error(e)
-
-FayasNoushad.run()
